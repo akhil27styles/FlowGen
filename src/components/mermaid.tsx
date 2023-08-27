@@ -13,22 +13,28 @@ import {
   ModalFooter,
 } from "@chakra-ui/react";
 
-// mermaid.initialize({
-//   startOnLoad: true,
-//   theme: "dark",
-//   securityLevel: "loose",
-//   themeCSS: `
+mermaid.initialize({
+  startOnLoad: true,
+  theme: "dark",
+  securityLevel: "loose",
+  themeCSS: `
 
-//   .
-//   `,
-//   fontFamily: "Fira Code",
-// });
+  .
+  `,
+  fontFamily: "Fira Code",
+});
 
 interface IMermaid {
   chart: string;
   name: string;
 }
-
+interface MermaidCodeModalProps {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
+  chart: string;
+  name: string;
+}
 export const Mermaid: FC<IMermaid> = ({ chart, name }) => {
   useEffect(() => {
     if (chart) mermaid.contentLoaded();
@@ -84,8 +90,10 @@ export const Mermaid: FC<IMermaid> = ({ chart, name }) => {
   );
 };
 
-export const MermaidCodeModal: FC<IMermaid> = (props: any) => {
+type ScrollBehavior = "inside" | "outside";
+export const MermaidCodeModal: FC<MermaidCodeModalProps> = (props: any) => {
   const { chart, name } = props;
+  const [scroll, setScroll] = React.useState<ScrollBehavior>("inside");
   useEffect(() => {
     if (chart) mermaid.contentLoaded();
   }, [chart]);
@@ -109,20 +117,18 @@ export const MermaidCodeModal: FC<IMermaid> = (props: any) => {
 
   const copyMermaidCode = async () => {
     await navigator.clipboard.writeText(chart);
-    alert("Mermaid Code" + chart);
   };
 
   const { isOpen, onClose, onOpen } = props;
 
-  const [scrollBehavior, setScrollBehavior] = React.useState("inside");
   return (
     <>
-      <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={scrollBehavior}>
+      <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={scroll}>
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>Modal Title</ModalHeader>
           <ModalCloseButton />
-          {/* <ModalBody>{chart}</ModalBody> */}
+          <ModalBody>{chart}</ModalBody>
 
           <ModalFooter>
             <Button colorScheme="blue" mr={3} onClick={onClose}>

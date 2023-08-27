@@ -51,6 +51,7 @@ export const SearchBox = (props: any) => {
       console.log(e);
       setError("Sorry! a small issue occurred");
     } finally {
+      setLoading(false);
     }
   };
 
@@ -91,7 +92,6 @@ export const SearchBox = (props: any) => {
             // border="1px solid #949494"
             p={loading ? 8 : 0}
             isLoading={loading}
-            loadingText="Generating"
             onClick={handleFlow}
           >
             <a

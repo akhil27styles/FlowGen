@@ -6,7 +6,10 @@ import { TextLoader } from "langchain/document_loaders";
 import { MarkdownTextSplitter } from "langchain/text_splitter";
 import { PromptTemplate } from "langchain";
 
-export const generate = async ({ input, selectedTemplate }) => {
+export const generate = async ({ input, selectedTemplate }: {
+  input: string;
+  selectedTemplate: string;
+}) => {
   try {
     const model = new OpenAI({ temperature: 0.9 });
 
@@ -38,7 +41,7 @@ export const generate = async ({ input, selectedTemplate }) => {
 
     return res;
   } catch (e) {
-    console.log("openai:debug", e?.response?.data);
+    console.log("openai:debug", (e as any)?.response?.data);
     throw e;
   }
 };

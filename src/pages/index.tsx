@@ -6,8 +6,7 @@ import { TemplateEnum } from "@/lib/prompt-by-template";
 import Image from "next/image";
 import Nav from "@/components/nav";
 import { ChakraBaseProvider } from "@chakra-ui/react";
-import { ChartDiv } from "@/components/chartDiv";
-
+import ChartDiv from "@/components/ChartDiv";
 const Index = (props: any) => {
   const { chart, loading } = props;
   const [error, setError] = useState("");

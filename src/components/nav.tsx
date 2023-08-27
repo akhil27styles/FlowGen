@@ -24,8 +24,7 @@ import {
 import { MermaidCodeModal } from "./mermaid";
 import { TemplateEnum } from "@/lib/prompt-by-template";
 import axios from "axios";
-import { ChartDiv } from "./chartDiv";
-
+import ChartDiv from "./ChartDiv";
 const Nav = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
