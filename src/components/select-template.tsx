@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from "react";
 import { TemplateEnum } from "@/lib/prompt-by-template";
+import { Select } from "@chakra-ui/react";
 
 interface ITemplate {
   label: string;
@@ -23,13 +24,22 @@ interface ISelectTemplate {
 
 const SelectTemplate: FunctionComponent<ISelectTemplate> = ({ onChange }) => {
   return (
-    <select onChange={onChange} className="select select-bordered select-lg">
-      {templates.map((item) => (
-        <option value={item.value} key={item.label}>
-          {item.label}
-        </option>
-      ))}
-    </select>
+    <>
+      {/* <select onChange={onChange} className="select select-bordered select-lg">
+        {templates.map((item) => (
+          <option value={item.value} key={item.label}>
+            {item.label}
+          </option>
+        ))}
+      </select> */}
+      <Select placeholder="Select Category" onChange={onChange}>
+        {templates.map((item) => (
+          <option value={item.value} key={item.label}>
+            {item.label}
+          </option>
+        ))}
+      </Select>
+    </>
   );
 };
 

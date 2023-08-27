@@ -1,17 +1,28 @@
 import React, { FC, useEffect } from "react";
 import mermaid from "mermaid";
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import {
+  useDisclosure,
+  Button,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalCloseButton,
+  ModalBody,
+  ModalFooter,
+} from "@chakra-ui/react";
 
-mermaid.initialize({
-  startOnLoad: true,
-  theme: "dark",
-  securityLevel: "loose",
-  themeCSS: `
-  
-  .
-  `,
-  fontFamily: "Fira Code",
-});
+// mermaid.initialize({
+//   startOnLoad: true,
+//   theme: "dark",
+//   securityLevel: "loose",
+//   themeCSS: `
+
+//   .
+//   `,
+//   fontFamily: "Fira Code",
+// });
 
 interface IMermaid {
   chart: string;
@@ -70,5 +81,59 @@ export const Mermaid: FC<IMermaid> = ({ chart, name }) => {
         </TransformComponent>{" "}
       </TransformWrapper>
     </div>
+  );
+};
+
+export const MermaidCodeModal: FC<IMermaid> = (props: any) => {
+  const { chart, name } = props;
+  useEffect(() => {
+    if (chart) mermaid.contentLoaded();
+  }, [chart]);
+
+  const exportSvg = async () => {
+    const svgData = await mermaid.render("text1", chart);
+
+    const svgBlob = new Blob([svgData.svg], {
+      type: "image/svg+xml;charset=utf-8",
+    });
+
+    const svgUrl = URL.createObjectURL(svgBlob);
+
+    const downloadLink = document.createElement("a");
+    downloadLink.href = svgUrl;
+    downloadLink.download = `${name}.svg`;
+    document.body.appendChild(downloadLink);
+    downloadLink.click();
+    document.body.removeChild(downloadLink);
+  };
+
+  const copyMermaidCode = async () => {
+    await navigator.clipboard.writeText(chart);
+    alert("Mermaid Code" + chart);
+  };
+
+  const { isOpen, onClose, onOpen } = props;
+
+  const [scrollBehavior, setScrollBehavior] = React.useState("inside");
+  return (
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} scrollBehavior={scrollBehavior}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Modal Title</ModalHeader>
+          <ModalCloseButton />
+          {/* <ModalBody>{chart}</ModalBody> */}
+
+          <ModalFooter>
+            <Button colorScheme="blue" mr={3} onClick={onClose}>
+              Close
+            </Button>
+            <Button variant="ghost" onClick={copyMermaidCode}>
+              Copy Mermaid code
+            </Button>
+          </ModalFooter>
+        </ModalContent>
+      </Modal>
+    </>
   );
 };
