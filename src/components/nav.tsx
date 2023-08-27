@@ -62,7 +62,13 @@ const Nav = () => {
       setLoading(false);
     }
   };
-
+  const handleShare=()=>{
+      if(chart){
+        const base64Code = btoa(unescape(encodeURIComponent(chart)));
+         const mermaidLiveEditorURL = `https://mermaid.ink/img/${base64Code}`;
+          window.open(mermaidLiveEditorURL, '_blank'); 
+      }
+  }
   return (
     <>
       {/* /////////////////// */}
@@ -116,6 +122,7 @@ const Nav = () => {
                 <MenuItem onClick={onOpen}>Copy Mermaid Code</MenuItem>
                 <MenuDivider />
                 <MenuItem>SVG</MenuItem>
+                <MenuItem  onClick={handleShare}>Share Url</MenuItem>
               </MenuList>
             </Menu>
           </div>
