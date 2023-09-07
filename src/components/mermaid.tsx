@@ -22,6 +22,9 @@ mermaid.initialize({
   .
   `,
   fontFamily: "Fira Code",
+  flowchart: {
+    useMaxWidth: true,
+  },
 });
 
 interface IMermaid {
@@ -43,11 +46,14 @@ export const Mermaid: FC<IMermaid> = ({ chart, name }) => {
   const exportSvg = async () => {
     const svgData = await mermaid.render("text1", chart);
 
+    console.log("svgData: " + JSON.stringify(svgData));
+
     const svgBlob = new Blob([svgData.svg], {
       type: "image/svg+xml;charset=utf-8",
     });
 
     const svgUrl = URL.createObjectURL(svgBlob);
+    console.log("svgUrl: " + svgUrl);
 
     const downloadLink = document.createElement("a");
     downloadLink.href = svgUrl;

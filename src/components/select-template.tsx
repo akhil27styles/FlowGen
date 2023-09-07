@@ -25,14 +25,7 @@ interface ISelectTemplate {
 const SelectTemplate: FunctionComponent<ISelectTemplate> = ({ onChange }) => {
   return (
     <>
-      {/* <select onChange={onChange} className="select select-bordered select-lg">
-        {templates.map((item) => (
-          <option value={item.value} key={item.label}>
-            {item.label}
-          </option>
-        ))}
-      </select> */}
-      <Select placeholder="Select Category" onChange={onChange}>
+      <Select onChange={onChange}>
         {templates.map((item) => (
           <option value={item.value} key={item.label}>
             {item.label}
