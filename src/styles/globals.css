@@ -2,20 +2,34 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Blackpast Futuristic";
+  src: url("BlackpastDemo-vm2l9.ttf") format("truetype"); /* Replace 'path/to/BlackpastDemo-vm2l9.ttf' with the actual path to your .ttf font file */
+}
+
+/* Apply the font to specific elements */
+.logo {
+  font-family: "Blackpast Futuristic", sans-serif; /* Use the font family name defined in @font-face */
+  font-size: 24px; /* Adjust the font size as needed */
+  color: #000; /* Set the font color to black (#000) or your preferred color */
+  /* Add any additional styling you want for your logo */
+}
+
 .btn-grad {
-    @apply bg-gradient-to-r from-teal-200 to-lime-200 text-black;
+  @apply bg-gradient-to-r from-teal-200 to-lime-200 text-black;
 }
 
 .bg-stripe {
-    background: #222 repeating-linear-gradient(
-            to bottom,
-            transparent 7px,
-            rgba(0, 0, 0, 0.8) 9px,
-            rgba(0, 0, 0, 0.8) 13px,
-            transparent 13px
+  background: #222
+    repeating-linear-gradient(
+      to bottom,
+      transparent 7px,
+      rgba(0, 0, 0, 0.8) 9px,
+      rgba(0, 0, 0, 0.8) 13px,
+      transparent 13px
     );
 }
 
-.mermaid svg{
-    margin: 0 auto!important;
+.mermaid svg {
+  margin: 0 auto !important;
 }

@@ -128,8 +128,8 @@ const Nav = () => {
         chart={chart}
         name={name}
       />
-      <nav className="p-4 flex justify-between items-center w-full">
-        <Heading className="left-0">FlowGen</Heading>
+      <nav className="p-4 lg:flex justify-between items-center w-full grid gap-4">
+        <h1 className="lg:left-0 text-center logo text-5xl">FlowGen</h1>
         <div className="flex justify-center items-center">
           <SearchBox chart={chart} setChart={setChart} />
         </div>
