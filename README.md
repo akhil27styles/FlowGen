@@ -1,5 +1,6 @@
 <div align="center">
-    <img src="public/brand/logo_text.png" alt="Superkey logo" />
+    <img src="https://github.com/akhil27styles/FlowGen/assets/52193850/21b0b742-3c99-46f9-9b16-80966a65416d
+" alt="Superkey logo" />
         </br></br>
     <h4 color="Yellow">FlowGen is a tool to generate flowchart with ai (gpt-3.5)</h4>
 
